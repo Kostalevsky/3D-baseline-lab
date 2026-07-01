@@ -4,6 +4,7 @@ from pathlib import Path
 from time import perf_counter
 
 from baseline_lab.baselines.iso import IsoOrthographicBaseline
+from baseline_lab.baselines.cap3d import Cap3DViewsBaseline
 from baseline_lab.demo import create_demo_mesh
 from baseline_lab.io import load_mesh, normalize_mesh
 
@@ -30,7 +31,7 @@ def main() -> None:
         "--baseline",
         type=str,
         default="iso",
-        choices=["iso"],
+        choices=["iso", "cap3d"],
         help="Baseline method to run",
     )
 
@@ -50,10 +51,24 @@ def main() -> None:
     )
 
     parser.add_argument(
+        "--output-root",
+        type=str,
+        default="outputs",
+        help="Root directory for organized baseline outputs",
+    )
+
+    parser.add_argument(
+        "--run-name",
+        type=str,
+        default=None,
+        help="Name of the output run folder",
+    )
+
+    parser.add_argument(
         "--out",
         type=str,
-        default="runs/output.png",
-        help="Output collage path",
+        default=None,
+        help="Optional direct output collage path. If not provided, output-root/baseline/run-name/collage.png is used.",
     )
 
     args = parser.parse_args()
@@ -77,12 +92,30 @@ def main() -> None:
             projection=args.projection,
             image_size=args.image_size,
         )
+    elif args.baseline == "cap3d":
+        baseline = Cap3DViewsBaseline(
+            image_size=args.image_size,
+            num_views=8,
+        )
     else:
         raise ValueError(f"Unknown baseline: {args.baseline}")
 
     result = baseline.run(mesh)
 
-    output_path = Path(args.out)
+    if args.out is not None:
+        output_path = Path(args.out)
+    else:
+        run_name = args.run_name
+
+        if run_name is None:
+            if args.demo:
+                run_name = f"demo_{args.baseline}_{args.projection}"
+            else:
+                input_stem = Path(args.input).stem
+                run_name = f"{input_stem}_{args.baseline}_{args.projection}"
+
+        output_path = Path(args.output_root) / args.baseline / run_name / "collage.png"
+
     baseline.save(result, output_path)
 
     runtime_seconds = perf_counter() - start_time
@@ -99,7 +132,7 @@ def main() -> None:
         "result": result.metadata,
     }
 
-    metadata_path = output_path.with_suffix(".json")
+    metadata_path = output_path.parent / "metadata.json"
     metadata_path.write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False),
         encoding="utf-8",

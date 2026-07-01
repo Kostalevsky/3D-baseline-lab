@@ -1,0 +1,27 @@
+{
+  "input": "demo",
+  "output": "outputs/iso/demo_iso_third/collage.png",
+  "runtime_seconds": 0.33325291698565707,
+  "mesh": {
+    "vertices": 24,
+    "faces": 36,
+    "extents": [
+      1.0,
+      0.7000000000000001,
+      0.8
+    ]
+  },
+  "result": {
+    "baseline": "iso_orthographic",
+    "projection": "third",
+    "views": [
+      "front",
+      "back",
+      "right",
+      "left",
+      "top",
+      "bottom"
+    ],
+    "image_size": 384
+  }
+}

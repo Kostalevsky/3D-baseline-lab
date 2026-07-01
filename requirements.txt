@@ -1,0 +1,5 @@
+numpy
+trimesh
+pyrender
+Pillow
+pyglet<2

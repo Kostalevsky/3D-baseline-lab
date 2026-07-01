@@ -1,0 +1,23 @@
+[project]
+name = "baseline-lab"
+version = "0.1.0"
+description = "Experiment framework for 3D object baseline rendering methods"
+requires-python = ">=3.10"
+
+dependencies = [
+    "numpy",
+    "trimesh",
+    "pyrender",
+    "Pillow",
+    "pyglet<2"
+]
+
+[project.scripts]
+baseline-lab = "baseline_lab.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

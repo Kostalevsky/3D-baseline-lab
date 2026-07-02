@@ -4,3 +4,5 @@ pyrender
 Pillow
 pyglet<2
 scikit-learn
+openai
+python-dotenv

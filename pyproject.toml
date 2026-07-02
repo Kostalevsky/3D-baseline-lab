@@ -10,7 +10,9 @@ dependencies = [
     "pyrender",
     "Pillow",
     "pyglet<2",
-    "scikit-learn"
+    "scikit-learn",
+    "openai",
+    "python-dotenv"
 ]
 
 [project.scripts]

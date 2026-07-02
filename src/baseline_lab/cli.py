@@ -7,6 +7,7 @@ from baseline_lab.baselines.iso import IsoOrthographicBaseline
 from baseline_lab.baselines.cap3d import Cap3DViewsBaseline
 from baseline_lab.baselines.algorithmic import AlgorithmicTopViewsBaseline
 from baseline_lab.baselines.isomap import IsomapViewSelectionBaseline
+from baseline_lab.baselines.vlm_iterative import VLMIterativeViewSelectionBaseline
 from baseline_lab.demo import create_demo_mesh
 from baseline_lab.io import load_mesh, normalize_mesh
 
@@ -33,7 +34,7 @@ def main() -> None:
         "--baseline",
         type=str,
         default="iso",
-        choices=["iso", "cap3d", "algorithmic", "isomap"],
+        choices=["iso", "cap3d", "algorithmic", "isomap", "vlm_iterative"],
         help="Baseline method to run",
     )
 
@@ -106,7 +107,11 @@ def main() -> None:
     elif args.baseline == "isomap":
         baseline = IsomapViewSelectionBaseline(
             image_size=args.image_size,
-    )
+        )
+    elif args.baseline == "vlm_iterative":
+        baseline = VLMIterativeViewSelectionBaseline(
+            image_size=args.image_size,
+        )
     else:
         raise ValueError(f"Unknown baseline: {args.baseline}")
 
@@ -129,6 +134,8 @@ def main() -> None:
 
             if args.baseline == "iso":
                 run_name = f"{input_stem}_{args.baseline}_{args.projection}"
+            elif args.baseline == "vlm_iterative":
+                run_name = f"{input_stem}_vlm_iterative"
             else:
                 run_name = f"{input_stem}_{args.baseline}"
 

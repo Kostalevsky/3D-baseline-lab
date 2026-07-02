@@ -1,0 +1,27 @@
+{
+  "input": "examples/models/test_part.obj",
+  "output": "outputs/iso/test_part_iso_third/collage.png",
+  "runtime_seconds": 0.42554387502605096,
+  "mesh": {
+    "vertices": 9232,
+    "faces": 16260,
+    "extents": [
+      1.0,
+      0.9121274886689134,
+      0.08392749922979034
+    ]
+  },
+  "result": {
+    "baseline": "iso_orthographic",
+    "projection": "third",
+    "views": [
+      "front",
+      "back",
+      "right",
+      "left",
+      "top",
+      "bottom"
+    ],
+    "image_size": 384
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "input": "examples/models/test_part.obj",
+  "output": "outputs/cap3d/test_part_cap3d_views/collage.png",
+  "runtime_seconds": 0.40112991601927206,
+  "mesh": {
+    "vertices": 9232,
+    "faces": 16260,
+    "extents": [
+      1.0,
+      0.9121274886689134,
+      0.08392749922979034
+    ]
+  },
+  "result": {
+    "baseline": "cap3d_views",
+    "description": "Cap3D-style multi-view rendering baseline without captioning",
+    "num_views": 8,
+    "elevation_deg": 25.0,
+    "radius": 2.5,
+    "image_size": 384,
+    "views": [
+      "view_00_0deg",
+      "view_01_45deg",
+      "view_02_90deg",
+      "view_03_135deg",
+      "view_04_180deg",
+      "view_05_225deg",
+      "view_06_270deg",
+      "view_07_315deg"
+    ]
+  }
+}

@@ -22,13 +22,14 @@ This makes it possible to compare different approaches to preparing 3D objects f
 
 ## Current baselines
 
-The framework currently supports four baseline methods:
+The framework currently supports five baseline methods:
 
 ```text
 1. ISO Orthographic Baseline
 2. Cap3D-style Views Baseline
 3. Algorithmic Top Views Baseline
 4. Isomap View Selection Baseline
+5. VLM Iterative View Selection Baseline
 ```
 
 ---
@@ -222,6 +223,116 @@ metadata.json         — parameters, features, embedding coordinates and select
 
 ---
 
+## VLM Iterative View Selection Baseline
+
+The VLM Iterative View Selection baseline uses a multimodal language model to iteratively improve the selected set of rendered views.
+
+This method starts from the same 28 candidate views used in the Isomap View Selection baseline. It then creates an initial selection based on visual quality scores and sends both the full candidate collage and the current selected collage to a vision-language model.
+
+The model analyzes the current set of views and returns a structured JSON decision:
+
+```text
+
+keep useful views
+
+remove weak or redundant views
+
+add more informative views
+
+explain the reasoning
+
+repeat for several iterations
+```
+
+The current implementation uses a Qwen vision-language model through an OpenAI-compatible API endpoint.
+
+```text
+3D object
+  -> normalize mesh
+  -> render 28 candidate views
+  -> create initial top-quality selection
+  -> send all views + current collage to VLM
+  -> receive JSON decision
+  -> update selected views
+  -> repeat for N iterations
+  -> save final collage + iteration metadata
+```
+
+The VLM receives:
+
+* the full 28-view candidate collage;
+* the current selected collage;
+* metadata for each candidate view: index, azimuth, elevation and visual quality scores.
+
+The VLN returns:
+
+```json
+{
+  "previous_selected_view_indices": [16, 23, 17, 22, 8, 18],
+  "selected_view_indices": [16, 23, 17, 22, 8, 20],
+  "removed_view_indices": [18],
+  "added_view_indices": [20],
+  "reasoning": "The selected views provide better coverage of shape, holes, silhouette and thickness.",
+  "visible_features": ["overall shape", "holes", "silhouette", "thickness"],
+  "missing_or_weak_features": [],
+  "confidence": 0.95
+}
+```
+
+Example command:
+
+```bash
+baseline-lab --input examples/models/test_part.obj --baseline vlm_iterative --image-size 256 --run-name test_part_vlm_iterative
+```
+
+```text
+outputs/
+  vlm_iterative/
+    test_part_vlm_iterative/
+      collage.png
+      all_views_collage.png
+      iteration_0_collage.png
+      iteration_1_collage.png
+      iteration_2_collage.png
+      final_collage.png
+      metadata.json
+```
+
+where
+
+```text
+all_views_collage.png  — all 28 candidate views
+iteration_0_collage.png — initial top-quality selection
+iteration_1_collage.png — VLM selection after first iteration
+iteration_2_collage.png — VLM selection after second iteration
+final_collage.png       — final VLM-guided selected collage
+metadata.json           — parameters, model output, reasoning and selected views
+```
+
+This method is experimental and depends on external VLM access. Unlike purely algorithmic baselines, the VLM-based method can use visual reasoning over the collage, but its explanations may occasionally contain inaccuracies. For this reason, all model decisions are saved in metadata.json.
+
+### *Environment variables for VLM baseline*
+
+The VLM Iterative baseline requires API access to a multimodal model.
+
+For Qwen through an OpenAI-compatible endpoint, create a local .env file:
+
+```env
+QWEN_API_KEY=your_qwen_api_key_here
+QWEN_BASE_URL=https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+QWEN_VLM_MODEL=qwen-vl-plus
+```
+
+The .env file must not be committed to GitHub. Use .env.example as a safe template:
+
+```env
+QWEN_API_KEY=your_qwen_api_key_here
+QWEN_BASE_URL=https://dashscope-intl.aliyuncs.com/compatible-mode/v1
+QWEN_VLM_MODEL=qwen-vl-plus
+```
+
+---
+
 ## Installation
 
 Create and activate a virtual environment:
@@ -250,6 +361,8 @@ The project uses:
 - `Pillow` for creating collages;
 - `numpy` for numerical operations;
 - `scikit-learn` for Isomap-based view selection.
+- `openai` for OpenAI-compatible API access to VLM providers;
+- `python-dotenv` for loading local environment variables from `.env`.
 
 ---
 
@@ -340,6 +453,29 @@ outputs/
       metadata.json
 ```
 
+### VLM Iterative View Selection
+
+```bash
+
+baseline-lab --input examples/models/test_part.obj --baseline vlm_iterative --image-size 256 --run-name test_part_vlm_iterative
+
+```
+
+This creates:
+
+```text
+outputs/
+  vlm_iterative/
+    test_part_vlm_iterative/
+      collage.png
+      all_views_collage.png
+      iteration_0_collage.png
+      iteration_1_collage.png
+      iteration_2_collage.png
+      final_collage.png
+      metadata.json
+```
+
 ---
 
 ## Usage with a custom 3D model
@@ -366,6 +502,12 @@ Run Isomap View Selection baseline:
 
 ```bash
 baseline-lab --input path/to/model.obj --baseline isomap --image-size 256 --run-name my_model_isomap
+```
+
+Run VLM Iterative View Selection baseline:
+
+```bash
+baseline-lab --input path/to/model.obj --baseline vlm_iterative --image-size 256 --run-name my_model_vlm_iterative
 ```
 
 Supported formats depend on `trimesh`, but usually include:
@@ -420,6 +562,18 @@ outputs/
       collage_4.png
       collage_6.png
       embedding.png
+      metadata.json
+    
+    ```text
+
+  vlm_iterative/
+    test_part_vlm_iterative/
+      collage.png
+      all_views_collage.png
+      iteration_0_collage.png
+      iteration_1_collage.png
+      iteration_2_collage.png
+      final_collage.png
       metadata.json
 ```
 
@@ -477,6 +631,49 @@ Example metadata for Isomap View Selection:
   }
 }
 ```
+
+Example metadata for VLM Iterative View Selection:
+
+```json
+{
+  "input": "examples/models/test_part.obj",
+  "output": "outputs/vlm_iterative/test_part_vlm_iterative/collage.png",
+  "runtime_seconds": 9.302,
+  "mesh": {
+    "vertices": 9232,
+    "faces": 16260,
+    "extents": [1.0, 0.912, 0.084]
+  },
+  "result": {
+    "baseline": "vlm_iterative_view_selection",
+    "model": "qwen-vl-plus",
+    "candidate_views": 28,
+    "target_views": 6,
+    "iterations": 2,
+    "initial_selection": {
+      "method": "top visual quality scores from 28 candidates",
+      "selected_view_indices": [16, 23, 17, 22, 8, 18]
+    },
+    "final_selection": {
+      "selected_view_indices": [16, 23, 17, 22, 8, 20]
+    },
+    "iterations_log": [
+      {
+        "iteration": 1,
+        "selected_view_indices": [16, 23, 17, 22, 8, 20],
+        "vlm_decision": {
+          "removed_view_indices": [18],
+          "added_view_indices": [20],
+          "reasoning": "The updated set provides a more informative and diverse view selection.",
+          "confidence": 0.95
+        }
+      }
+    ]
+  }
+}
+```
+
+For the VLM Iterative baseline, metadata is especially important because it stores the model reasoning for each iteration. This makes the selection process inspectable: the output is not only a final collage, but also a record of how the multimodal model changed the selected view set.
 
 The metadata file is useful for tracking:
 
@@ -536,6 +733,7 @@ The `runs/` directory is intended for local experiments and is usually ignored b
         cap3d.py
         algorithmic.py
         isomap.py
+        vlm_iterative.py
 
   examples/
     models/
@@ -661,3 +859,8 @@ Run Isomap View Selection on the test model:
 ```bash
 baseline-lab --input examples/models/test_part.obj --baseline isomap --image-size 256 --run-name test_part_isomap
 ```
+
+Run VLM Iterative View Selection on the test model:
+
+```bash
+baseline-lab --input examples/models/test_part.obj --baseline vlm_iterative --image-size 256 --run-name test_part_vlm_iterative

@@ -5,6 +5,7 @@ from time import perf_counter
 
 from baseline_lab.baselines.iso import IsoOrthographicBaseline
 from baseline_lab.baselines.cap3d import Cap3DViewsBaseline
+from baseline_lab.baselines.algorithmic import AlgorithmicTopViewsBaseline
 from baseline_lab.demo import create_demo_mesh
 from baseline_lab.io import load_mesh, normalize_mesh
 
@@ -31,7 +32,7 @@ def main() -> None:
         "--baseline",
         type=str,
         default="iso",
-        choices=["iso", "cap3d"],
+        choices=["iso", "cap3d", "algorithmic"],
         help="Baseline method to run",
     )
 
@@ -97,22 +98,34 @@ def main() -> None:
             image_size=args.image_size,
             num_views=8,
         )
+    elif args.baseline == "algorithmic":
+        baseline = AlgorithmicTopViewsBaseline(
+            image_size=args.image_size,
+        )
     else:
         raise ValueError(f"Unknown baseline: {args.baseline}")
 
     result = baseline.run(mesh)
 
+    # Build output path.
+    # If --out is provided, save directly to that path.
+    # Otherwise, use organized structure:
+    # outputs/{baseline}/{run_name}/collage.png
     if args.out is not None:
         output_path = Path(args.out)
     else:
-        run_name = args.run_name
-
-        if run_name is None:
+        if args.run_name is not None:
+            run_name = args.run_name
+        else:
             if args.demo:
-                run_name = f"demo_{args.baseline}_{args.projection}"
+                input_stem = "demo"
             else:
                 input_stem = Path(args.input).stem
+
+            if args.baseline == "iso":
                 run_name = f"{input_stem}_{args.baseline}_{args.projection}"
+            else:
+                run_name = f"{input_stem}_{args.baseline}"
 
         output_path = Path(args.output_root) / args.baseline / run_name / "collage.png"
 
@@ -132,7 +145,14 @@ def main() -> None:
         "result": result.metadata,
     }
 
-    metadata_path = output_path.parent / "metadata.json"
+    # If user gave a direct --out path, metadata goes next to it with .json suffix.
+    # Otherwise, metadata goes inside the same organized run folder.
+    if args.out is not None:
+        metadata_path = output_path.with_suffix(".json")
+    else:
+        metadata_path = output_path.parent / "metadata.json"
+
+    metadata_path.parent.mkdir(parents=True, exist_ok=True)
     metadata_path.write_text(
         json.dumps(metadata, indent=2, ensure_ascii=False),
         encoding="utf-8",

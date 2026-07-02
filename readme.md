@@ -69,6 +69,37 @@ In this repository, the first implemented Cap3D-style baseline focuses only on t
 
 This baseline does not perform caption generation yet. Captioning and LLM-based consolidation are planned as future modules.
 
+### Algorithmic Top Views Baseline
+
+The algorithmic baseline automatically selects the most informative views from a larger set of candidate renders.
+
+It first renders 24 candidate views around the object using different azimuth and elevation angles. Then each view is scored using simple visual features:
+
+- visible silhouette area;
+- bounding box fill ratio;
+- silhouette / contour complexity;
+- view diversity.
+
+The final collage is assembled from the top 8 selected views.
+
+Example pipeline:
+
+```text
+3D object
+  -> normalize mesh
+  -> render 24 candidate views
+  -> score each view algorithmically
+  -> select top 8 diverse views
+  -> assemble collage
+  -> save PNG + JSON metadata
+```
+
+Usage:
+
+```bash
+baseline-lab --input examples/models/test_part.obj --baseline algorithmic --image-size 384 --run-name test_part_algorithmic_top8
+```
+
 ## Installation
 
 Create and activate a virtual environment:
@@ -136,6 +167,21 @@ This creates:
 outputs/
   cap3d/
     demo_cap3d_views/
+      collage.png
+      metadata.json
+```
+
+### Algorithmic Top Views Baseline
+
+```bash
+baseline-lab --input examples/models/test_part.obj --baseline algorithmic --image-size 384 --run-name test_part_algorithmic_top8
+```
+
+This creates:
+```text
+outputs/
+  algorithmic/
+    test_part_algorithmic_top8/
       collage.png
       metadata.json
 ```

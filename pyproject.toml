@@ -9,7 +9,8 @@ dependencies = [
     "trimesh",
     "pyrender",
     "Pillow",
-    "pyglet<2"
+    "pyglet<2",
+    "scikit-learn"
 ]
 
 [project.scripts]

@@ -6,6 +6,7 @@ from time import perf_counter
 from baseline_lab.baselines.iso import IsoOrthographicBaseline
 from baseline_lab.baselines.cap3d import Cap3DViewsBaseline
 from baseline_lab.baselines.algorithmic import AlgorithmicTopViewsBaseline
+from baseline_lab.baselines.isomap import IsomapViewSelectionBaseline
 from baseline_lab.demo import create_demo_mesh
 from baseline_lab.io import load_mesh, normalize_mesh
 
@@ -32,7 +33,7 @@ def main() -> None:
         "--baseline",
         type=str,
         default="iso",
-        choices=["iso", "cap3d", "algorithmic"],
+        choices=["iso", "cap3d", "algorithmic", "isomap"],
         help="Baseline method to run",
     )
 
@@ -102,6 +103,10 @@ def main() -> None:
         baseline = AlgorithmicTopViewsBaseline(
             image_size=args.image_size,
         )
+    elif args.baseline == "isomap":
+        baseline = IsomapViewSelectionBaseline(
+            image_size=args.image_size,
+    )
     else:
         raise ValueError(f"Unknown baseline: {args.baseline}")
 

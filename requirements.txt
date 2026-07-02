@@ -3,3 +3,4 @@ trimesh
 pyrender
 Pillow
 pyglet<2
+scikit-learn

@@ -1,0 +1,774 @@
+{
+  "input": "examples/models/test_part.obj",
+  "output": "outputs/isomap/test_part_isomap_v3/collage.png",
+  "runtime_seconds": 0.6523965829983354,
+  "mesh": {
+    "vertices": 9232,
+    "faces": 16260,
+    "extents": [
+      1.0,
+      0.9121274886689134,
+      0.08392749922979034
+    ]
+  },
+  "result": {
+    "baseline": "isomap_view_selection",
+    "description": "28-view rendering pipeline with Isomap-based view selection",
+    "total_views": 28,
+    "selected_counts": [
+      3,
+      4,
+      6
+    ],
+    "image_size": 256,
+    "radius": 2.5,
+    "view_generation": {
+      "elevation_15": "8 azimuth views",
+      "elevation_35": "8 azimuth views",
+      "elevation_60": "8 azimuth views",
+      "elevation_80": "4 high-angle views",
+      "total": "28 views"
+    },
+    "feature_extraction": {
+      "image_features": "downsampled grayscale image",
+      "mask_features": "area ratio, bbox fill score, edge ratio"
+    },
+    "selection": {
+      "method": "quality-aware farthest point sampling in 2D Isomap embedding",
+      "quality_threshold": 0.45,
+      "selection_score": "0.60 * isomap_diversity + 0.40 * visual_quality",
+      "outputs": [
+        "collage_3.png",
+        "collage_4.png",
+        "collage_6.png"
+      ]
+    },
+    "views": [
+      {
+        "index": 0,
+        "name": "view_00_az000_el15",
+        "azimuth_deg": 0.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.0597991943359375,
+        "bbox_fill_score": 0.6731363792511165,
+        "edge_ratio": 0.00537109375,
+        "quality_score": 0.37868091464042664,
+        "area_score": 0.3214145302772522,
+        "edge_score": 0.09726962447166443,
+        "bbox_score": 1.0,
+        "embedding": [
+          7.320298194885254,
+          -15.387749671936035
+        ]
+      },
+      {
+        "index": 1,
+        "name": "view_01_az045_el15",
+        "azimuth_deg": 45.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.0556793212890625,
+        "bbox_fill_score": 0.6524226711961381,
+        "edge_ratio": 0.004791259765625,
+        "quality_score": 0.2955586612224579,
+        "area_score": 0.21532416343688965,
+        "edge_score": 0.03242320939898491,
+        "bbox_score": 0.9365733861923218,
+        "embedding": [
+          -5.199573993682861,
+          -5.155941009521484
+        ]
+      },
+      {
+        "index": 2,
+        "name": "view_02_az090_el15",
+        "azimuth_deg": 90.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.05291748046875,
+        "bbox_fill_score": 0.6407982261640798,
+        "edge_ratio": 0.0047454833984375,
+        "quality_score": 0.254643976688385,
+        "area_score": 0.14420431852340698,
+        "edge_score": 0.027303753420710564,
+        "bbox_score": 0.900978684425354,
+        "embedding": [
+          1.5315852165222168,
+          -4.89578104019165
+        ]
+      },
+      {
+        "index": 3,
+        "name": "view_03_az135_el15",
+        "azimuth_deg": 135.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.0504608154296875,
+        "bbox_fill_score": 0.6458984375,
+        "edge_ratio": 0.004913330078125,
+        "quality_score": 0.23586980998516083,
+        "area_score": 0.0809430256485939,
+        "edge_score": 0.046075087040662766,
+        "bbox_score": 0.9165958166122437,
+        "embedding": [
+          0.22947585582733154,
+          -8.552779197692871
+        ]
+      },
+      {
+        "index": 4,
+        "name": "view_04_az180_el15",
+        "azimuth_deg": 180.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.0473175048828125,
+        "bbox_fill_score": 0.6634574240479247,
+        "edge_ratio": 0.0045013427734375,
+        "quality_score": 0.19407249987125397,
+        "area_score": 0.0,
+        "edge_score": 0.0,
+        "bbox_score": 0.9703624844551086,
+        "embedding": [
+          -8.474374771118164,
+          3.1339967250823975
+        ]
+      },
+      {
+        "index": 5,
+        "name": "view_05_az225_el15",
+        "azimuth_deg": 225.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.050506591796875,
+        "bbox_fill_score": 0.646484375,
+        "edge_ratio": 0.0048065185546875,
+        "quality_score": 0.23257820308208466,
+        "area_score": 0.08212180435657501,
+        "edge_score": 0.03412969410419464,
+        "bbox_score": 0.9183899760246277,
+        "embedding": [
+          -4.3510284423828125,
+          -8.770469665527344
+        ]
+      },
+      {
+        "index": 6,
+        "name": "view_06_az270_el15",
+        "azimuth_deg": 270.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.0529327392578125,
+        "bbox_fill_score": 0.6409830007390983,
+        "edge_ratio": 0.0048828125,
+        "quality_score": 0.2603093981742859,
+        "area_score": 0.14459724724292755,
+        "edge_score": 0.0426621176302433,
+        "bbox_score": 0.901544451713562,
+        "embedding": [
+          -2.4559266567230225,
+          -6.276245594024658
+        ]
+      },
+      {
+        "index": 7,
+        "name": "view_07_az315_el15",
+        "azimuth_deg": 315.0,
+        "elevation_deg": 15.0,
+        "area_ratio": 0.055694580078125,
+        "bbox_fill_score": 0.6526014661183622,
+        "edge_ratio": 0.004791259765625,
+        "quality_score": 0.29584500193595886,
+        "area_score": 0.21571709215641022,
+        "edge_score": 0.03242320939898491,
+        "bbox_score": 0.9371209144592285,
+        "embedding": [
+          -7.628626346588135,
+          -5.253271102905273
+        ]
+      },
+      {
+        "index": 8,
+        "name": "view_08_az000_el35",
+        "azimuth_deg": 0.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.082855224609375,
+        "bbox_fill_score": 0.5103383458646616,
+        "edge_ratio": 0.0102386474609375,
+        "quality_score": 0.736681342124939,
+        "area_score": 0.915127694606781,
+        "edge_score": 0.6416382193565369,
+        "bbox_score": 0.5015028715133667,
+        "embedding": [
+          17.812637329101562,
+          -15.957530975341797
+        ]
+      },
+      {
+        "index": 9,
+        "name": "view_09_az045_el35",
+        "azimuth_deg": 45.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.079498291015625,
+        "bbox_fill_score": 0.4990421455938697,
+        "edge_ratio": 0.0099334716796875,
+        "quality_score": 0.6789183020591736,
+        "area_score": 0.8286836743354797,
+        "edge_score": 0.6075085401535034,
+        "bbox_score": 0.46691325306892395,
+        "embedding": [
+          -16.035011291503906,
+          -6.272830009460449
+        ]
+      },
+      {
+        "index": 10,
+        "name": "view_10_az090_el35",
+        "azimuth_deg": 90.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.0759735107421875,
+        "bbox_fill_score": 0.4936545706920484,
+        "edge_ratio": 0.00958251953125,
+        "quality_score": 0.6210368871688843,
+        "area_score": 0.7379174828529358,
+        "edge_score": 0.5682593584060669,
+        "bbox_score": 0.4504161775112152,
+        "embedding": [
+          7.0257039070129395,
+          1.5445289611816406
+        ]
+      },
+      {
+        "index": 11,
+        "name": "view_11_az135_el35",
+        "azimuth_deg": 135.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.07275390625,
+        "bbox_fill_score": 0.49666666666666665,
+        "edge_ratio": 0.0093994140625,
+        "quality_score": 0.5784058570861816,
+        "area_score": 0.6550098061561584,
+        "edge_score": 0.5477815866470337,
+        "bbox_score": 0.45963940024375916,
+        "embedding": [
+          0.5401800870895386,
+          -13.118664741516113
+        ]
+      },
+      {
+        "index": 12,
+        "name": "view_12_az180_el35",
+        "azimuth_deg": 180.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.0702667236328125,
+        "bbox_fill_score": 0.5223457350272233,
+        "edge_ratio": 0.009185791015625,
+        "quality_score": 0.5569490194320679,
+        "area_score": 0.5909626483917236,
+        "edge_score": 0.5238907933235168,
+        "bbox_score": 0.5382701754570007,
+        "embedding": [
+          -10.112436294555664,
+          15.525365829467773
+        ]
+      },
+      {
+        "index": 13,
+        "name": "view_13_az225_el35",
+        "azimuth_deg": 225.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.072723388671875,
+        "bbox_fill_score": 0.49645833333333333,
+        "edge_ratio": 0.0093841552734375,
+        "quality_score": 0.5773273706436157,
+        "area_score": 0.6542239785194397,
+        "edge_score": 0.5460751056671143,
+        "bbox_score": 0.45900145173072815,
+        "embedding": [
+          -2.45235538482666,
+          -13.420851707458496
+        ]
+      },
+      {
+        "index": 14,
+        "name": "view_14_az270_el35",
+        "azimuth_deg": 270.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.075958251953125,
+        "bbox_fill_score": 0.4935554233591116,
+        "edge_ratio": 0.0098114013671875,
+        "quality_score": 0.629758358001709,
+        "area_score": 0.7375245690345764,
+        "edge_score": 0.5938566327095032,
+        "bbox_score": 0.45011258125305176,
+        "embedding": [
+          6.748019695281982,
+          -0.9308850765228271
+        ]
+      },
+      {
+        "index": 15,
+        "name": "view_15_az315_el35",
+        "azimuth_deg": 315.0,
+        "elevation_deg": 35.0,
+        "area_ratio": 0.0795440673828125,
+        "bbox_fill_score": 0.4993295019157088,
+        "edge_ratio": 0.00994873046875,
+        "quality_score": 0.6802219748497009,
+        "area_score": 0.8298624753952026,
+        "edge_score": 0.6092150211334229,
+        "bbox_score": 0.46779313683509827,
+        "embedding": [
+          -22.939023971557617,
+          -6.35520601272583
+        ]
+      },
+      {
+        "index": 16,
+        "name": "view_16_az000_el60",
+        "azimuth_deg": 0.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.086151123046875,
+        "bbox_fill_score": 0.4051377726750861,
+        "edge_ratio": 0.0124664306640625,
+        "quality_score": 0.7976492047309875,
+        "area_score": 1.0,
+        "edge_score": 0.8907849788665771,
+        "bbox_score": 0.17937254905700684,
+        "embedding": [
+          38.27438735961914,
+          1.079884648323059
+        ]
+      },
+      {
+        "index": 17,
+        "name": "view_17_az045_el60",
+        "azimuth_deg": 45.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.0841217041015625,
+        "bbox_fill_score": 0.38941866214593485,
+        "edge_ratio": 0.0123291015625,
+        "quality_score": 0.7591305375099182,
+        "area_score": 0.9477406740188599,
+        "edge_score": 0.8754266500473022,
+        "bbox_score": 0.13123971223831177,
+        "embedding": [
+          -15.8906831741333,
+          -6.587013244628906
+        ]
+      },
+      {
+        "index": 18,
+        "name": "view_18_az090_el60",
+        "azimuth_deg": 90.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.0824432373046875,
+        "bbox_fill_score": 0.39495614035087717,
+        "edge_ratio": 0.011962890625,
+        "quality_score": 0.7287374138832092,
+        "area_score": 0.9045186638832092,
+        "edge_score": 0.8344709873199463,
+        "bbox_score": 0.1481957882642746,
+        "embedding": [
+          9.454448699951172,
+          17.543163299560547
+        ]
+      },
+      {
+        "index": 19,
+        "name": "view_19_az135_el60",
+        "azimuth_deg": 135.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.080596923828125,
+        "bbox_fill_score": 0.391781634772289,
+        "edge_ratio": 0.0118560791015625,
+        "quality_score": 0.701217532157898,
+        "area_score": 0.8569744825363159,
+        "edge_score": 0.8225256204605103,
+        "bbox_score": 0.13847526907920837,
+        "embedding": [
+          8.322249412536621,
+          -8.372456550598145
+        ]
+      },
+      {
+        "index": 20,
+        "name": "view_20_az180_el60",
+        "azimuth_deg": 180.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.0787811279296875,
+        "bbox_fill_score": 0.41370192307692305,
+        "edge_ratio": 0.0117034912109375,
+        "quality_score": 0.6876277923583984,
+        "area_score": 0.8102161288261414,
+        "edge_score": 0.8054607510566711,
+        "bbox_score": 0.20559647679328918,
+        "embedding": [
+          -15.496380805969238,
+          19.994688034057617
+        ]
+      },
+      {
+        "index": 21,
+        "name": "view_21_az225_el60",
+        "azimuth_deg": 225.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.0805816650390625,
+        "bbox_fill_score": 0.39170746180091975,
+        "edge_ratio": 0.011871337890625,
+        "quality_score": 0.7015925645828247,
+        "area_score": 0.8565815091133118,
+        "edge_score": 0.8242321014404297,
+        "bbox_score": 0.13824814558029175,
+        "embedding": [
+          6.244107246398926,
+          -8.711478233337402
+        ]
+      },
+      {
+        "index": 22,
+        "name": "view_22_az270_el60",
+        "azimuth_deg": 270.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.0824737548828125,
+        "bbox_fill_score": 0.39510233918128657,
+        "edge_ratio": 0.0121917724609375,
+        "quality_score": 0.7381396293640137,
+        "area_score": 0.905304491519928,
+        "edge_score": 0.8600682616233826,
+        "bbox_score": 0.14864346385002136,
+        "embedding": [
+          8.978475570678711,
+          10.48499584197998
+        ]
+      },
+      {
+        "index": 23,
+        "name": "view_23_az315_el60",
+        "azimuth_deg": 315.0,
+        "elevation_deg": 60.0,
+        "area_ratio": 0.084014892578125,
+        "bbox_fill_score": 0.38892420710602527,
+        "edge_ratio": 0.0124053955078125,
+        "quality_score": 0.7605763077735901,
+        "area_score": 0.9449901580810547,
+        "edge_score": 0.8839590549468994,
+        "bbox_score": 0.1297256499528885,
+        "embedding": [
+          -27.583873748779297,
+          -4.7283124923706055
+        ]
+      },
+      {
+        "index": 24,
+        "name": "view_24_az000_el80",
+        "azimuth_deg": 0.0,
+        "elevation_deg": 80.0,
+        "area_ratio": 0.078369140625,
+        "bbox_fill_score": 0.3465587044534413,
+        "edge_ratio": 0.0134429931640625,
+        "quality_score": 0.7098231911659241,
+        "area_score": 0.7996070981025696,
+        "edge_score": 1.0,
+        "bbox_score": 0.0,
+        "embedding": [
+          26.841514587402344,
+          5.866714000701904
+        ]
+      },
+      {
+        "index": 25,
+        "name": "view_25_az090_el80",
+        "azimuth_deg": 90.0,
+        "elevation_deg": 80.0,
+        "area_ratio": 0.0780487060546875,
+        "bbox_fill_score": 0.34974358974358977,
+        "edge_ratio": 0.013092041015625,
+        "quality_score": 0.6943232417106628,
+        "area_score": 0.7913556098937988,
+        "edge_score": 0.9607508778572083,
+        "bbox_score": 0.00975230522453785,
+        "embedding": [
+          6.471138000488281,
+          21.774730682373047
+        ]
+      },
+      {
+        "index": 26,
+        "name": "view_26_az180_el80",
+        "azimuth_deg": 180.0,
+        "elevation_deg": 80.0,
+        "area_ratio": 0.0771331787109375,
+        "bbox_fill_score": 0.357597623089983,
+        "edge_ratio": 0.012969970703125,
+        "quality_score": 0.6837459802627563,
+        "area_score": 0.7677799463272095,
+        "edge_score": 0.947098970413208,
+        "bbox_score": 0.033801816403865814,
+        "embedding": [
+          -13.698616027832031,
+          23.780170440673828
+        ]
+      },
+      {
+        "index": 27,
+        "name": "view_27_az270_el80",
+        "azimuth_deg": 270.0,
+        "elevation_deg": 80.0,
+        "area_ratio": 0.078033447265625,
+        "bbox_fill_score": 0.34967521367521365,
+        "edge_ratio": 0.01318359375,
+        "quality_score": 0.6976881623268127,
+        "area_score": 0.7909626960754395,
+        "edge_score": 0.9709897637367249,
+        "bbox_score": 0.009542933665215969,
+        "embedding": [
+          6.523681163787842,
+          18.01921844482422
+        ]
+      }
+    ],
+    "selected": {
+      "3": [
+        {
+          "index": 16,
+          "name": "view_16_az000_el60",
+          "azimuth_deg": 0.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.086151123046875,
+          "bbox_fill_score": 0.4051377726750861,
+          "edge_ratio": 0.0124664306640625,
+          "quality_score": 0.7976492047309875,
+          "area_score": 1.0,
+          "edge_score": 0.8907849788665771,
+          "bbox_score": 0.17937254905700684,
+          "embedding": [
+            38.27438735961914,
+            1.079884648323059
+          ],
+          "selection_rank": 0
+        },
+        {
+          "index": 23,
+          "name": "view_23_az315_el60",
+          "azimuth_deg": 315.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.084014892578125,
+          "bbox_fill_score": 0.38892420710602527,
+          "edge_ratio": 0.0124053955078125,
+          "quality_score": 0.7605763077735901,
+          "area_score": 0.9449901580810547,
+          "edge_score": 0.8839590549468994,
+          "bbox_score": 0.1297256499528885,
+          "embedding": [
+            -27.583873748779297,
+            -4.7283124923706055
+          ],
+          "selection_rank": 1
+        },
+        {
+          "index": 25,
+          "name": "view_25_az090_el80",
+          "azimuth_deg": 90.0,
+          "elevation_deg": 80.0,
+          "area_ratio": 0.0780487060546875,
+          "bbox_fill_score": 0.34974358974358977,
+          "edge_ratio": 0.013092041015625,
+          "quality_score": 0.6943232417106628,
+          "area_score": 0.7913556098937988,
+          "edge_score": 0.9607508778572083,
+          "bbox_score": 0.00975230522453785,
+          "embedding": [
+            6.471138000488281,
+            21.774730682373047
+          ],
+          "selection_rank": 2
+        }
+      ],
+      "4": [
+        {
+          "index": 16,
+          "name": "view_16_az000_el60",
+          "azimuth_deg": 0.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.086151123046875,
+          "bbox_fill_score": 0.4051377726750861,
+          "edge_ratio": 0.0124664306640625,
+          "quality_score": 0.7976492047309875,
+          "area_score": 1.0,
+          "edge_score": 0.8907849788665771,
+          "bbox_score": 0.17937254905700684,
+          "embedding": [
+            38.27438735961914,
+            1.079884648323059
+          ],
+          "selection_rank": 0
+        },
+        {
+          "index": 23,
+          "name": "view_23_az315_el60",
+          "azimuth_deg": 315.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.084014892578125,
+          "bbox_fill_score": 0.38892420710602527,
+          "edge_ratio": 0.0124053955078125,
+          "quality_score": 0.7605763077735901,
+          "area_score": 0.9449901580810547,
+          "edge_score": 0.8839590549468994,
+          "bbox_score": 0.1297256499528885,
+          "embedding": [
+            -27.583873748779297,
+            -4.7283124923706055
+          ],
+          "selection_rank": 1
+        },
+        {
+          "index": 25,
+          "name": "view_25_az090_el80",
+          "azimuth_deg": 90.0,
+          "elevation_deg": 80.0,
+          "area_ratio": 0.0780487060546875,
+          "bbox_fill_score": 0.34974358974358977,
+          "edge_ratio": 0.013092041015625,
+          "quality_score": 0.6943232417106628,
+          "area_score": 0.7913556098937988,
+          "edge_score": 0.9607508778572083,
+          "bbox_score": 0.00975230522453785,
+          "embedding": [
+            6.471138000488281,
+            21.774730682373047
+          ],
+          "selection_rank": 2
+        },
+        {
+          "index": 21,
+          "name": "view_21_az225_el60",
+          "azimuth_deg": 225.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.0805816650390625,
+          "bbox_fill_score": 0.39170746180091975,
+          "edge_ratio": 0.011871337890625,
+          "quality_score": 0.7015925645828247,
+          "area_score": 0.8565815091133118,
+          "edge_score": 0.8242321014404297,
+          "bbox_score": 0.13824814558029175,
+          "embedding": [
+            6.244107246398926,
+            -8.711478233337402
+          ],
+          "selection_rank": 3
+        }
+      ],
+      "6": [
+        {
+          "index": 16,
+          "name": "view_16_az000_el60",
+          "azimuth_deg": 0.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.086151123046875,
+          "bbox_fill_score": 0.4051377726750861,
+          "edge_ratio": 0.0124664306640625,
+          "quality_score": 0.7976492047309875,
+          "area_score": 1.0,
+          "edge_score": 0.8907849788665771,
+          "bbox_score": 0.17937254905700684,
+          "embedding": [
+            38.27438735961914,
+            1.079884648323059
+          ],
+          "selection_rank": 0
+        },
+        {
+          "index": 23,
+          "name": "view_23_az315_el60",
+          "azimuth_deg": 315.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.084014892578125,
+          "bbox_fill_score": 0.38892420710602527,
+          "edge_ratio": 0.0124053955078125,
+          "quality_score": 0.7605763077735901,
+          "area_score": 0.9449901580810547,
+          "edge_score": 0.8839590549468994,
+          "bbox_score": 0.1297256499528885,
+          "embedding": [
+            -27.583873748779297,
+            -4.7283124923706055
+          ],
+          "selection_rank": 1
+        },
+        {
+          "index": 25,
+          "name": "view_25_az090_el80",
+          "azimuth_deg": 90.0,
+          "elevation_deg": 80.0,
+          "area_ratio": 0.0780487060546875,
+          "bbox_fill_score": 0.34974358974358977,
+          "edge_ratio": 0.013092041015625,
+          "quality_score": 0.6943232417106628,
+          "area_score": 0.7913556098937988,
+          "edge_score": 0.9607508778572083,
+          "bbox_score": 0.00975230522453785,
+          "embedding": [
+            6.471138000488281,
+            21.774730682373047
+          ],
+          "selection_rank": 2
+        },
+        {
+          "index": 21,
+          "name": "view_21_az225_el60",
+          "azimuth_deg": 225.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.0805816650390625,
+          "bbox_fill_score": 0.39170746180091975,
+          "edge_ratio": 0.011871337890625,
+          "quality_score": 0.7015925645828247,
+          "area_score": 0.8565815091133118,
+          "edge_score": 0.8242321014404297,
+          "bbox_score": 0.13824814558029175,
+          "embedding": [
+            6.244107246398926,
+            -8.711478233337402
+          ],
+          "selection_rank": 3
+        },
+        {
+          "index": 20,
+          "name": "view_20_az180_el60",
+          "azimuth_deg": 180.0,
+          "elevation_deg": 60.0,
+          "area_ratio": 0.0787811279296875,
+          "bbox_fill_score": 0.41370192307692305,
+          "edge_ratio": 0.0117034912109375,
+          "quality_score": 0.6876277923583984,
+          "area_score": 0.8102161288261414,
+          "edge_score": 0.8054607510566711,
+          "bbox_score": 0.20559647679328918,
+          "embedding": [
+            -15.496380805969238,
+            19.994688034057617
+          ],
+          "selection_rank": 4
+        },
+        {
+          "index": 8,
+          "name": "view_08_az000_el35",
+          "azimuth_deg": 0.0,
+          "elevation_deg": 35.0,
+          "area_ratio": 0.082855224609375,
+          "bbox_fill_score": 0.5103383458646616,
+          "edge_ratio": 0.0102386474609375,
+          "quality_score": 0.736681342124939,
+          "area_score": 0.915127694606781,
+          "edge_score": 0.6416382193565369,
+          "bbox_score": 0.5015028715133667,
+          "embedding": [
+            17.812637329101562,
+            -15.957530975341797
+          ],
+          "selection_rank": 5
+        }
+      ]
+    },
+    "extra_images": [
+      "all_views_collage.png",
+      "embedding.png",
+      "collage_3.png",
+      "collage_4.png",
+      "collage_6.png"
+    ]
+  }
+}
